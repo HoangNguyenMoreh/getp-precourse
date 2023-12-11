@@ -2,7 +2,18 @@ import heap
 
 def dijkstra(graph, start):
     distances = {node: float('inf') for node in graph}
-    # TODO : FILL IN HERE
+
+    distances[start] = 0
+    min_heap = heap.MinHeap()
+    min_heap.heap = [(0, start)]
+    while len(min_heap.heap) > 0:
+        min_in_heap = min_heap.pop()
+        current_node = min_in_heap[1]
+        for adjacent_node in graph[current_node]:
+            distance_to_compare = distances[current_node] + graph[current_node][adjacent_node]
+            if distances[adjacent_node] > distance_to_compare:
+                distances[adjacent_node] = distance_to_compare
+                min_heap.push((distance_to_compare, adjacent_node))
 
     return distances
 
