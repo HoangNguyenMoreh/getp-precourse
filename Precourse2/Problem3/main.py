@@ -75,10 +75,12 @@ def cov_images_optim(A, debug=False):
     # Clear traces of memory blocks allocated by Python
     # before moving to the next section.
     tracemalloc.clear_traces()
-
-    means = np.mean(A.reshape(A.shape[0], -1), axis=1)
-    covs = np.matmul((A.reshape(A.shape[0], -1) - means[:, np.newaxis]),
-                     (A.reshape(A.shape[0], -1) - means[:, np.newaxis]).T)      
+    
+    A_reshaped = A.reshape(B, -1, order='F')
+    means = np.mean(A_reshaped, axis=1)
+    A_norm = A_reshaped.view() 
+    A_norm -= means[:, np.newaxis]
+    covs = np.matmul(A_norm, A_norm.T)      
 
     snapshot = tracemalloc.take_snapshot()
     np_domain = np.lib.tracemalloc_domain
