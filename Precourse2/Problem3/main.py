@@ -76,9 +76,9 @@ def cov_images_optim(A, debug=False):
     # before moving to the next section.
     tracemalloc.clear_traces()
 
-    ### TODO: fill in here ###
-
-    ##########################
+    means = np.mean(A.reshape(A.shape[0], -1), axis=1)
+    covs = np.matmul((A.reshape(A.shape[0], -1) - means[:, np.newaxis]),
+                     (A.reshape(A.shape[0], -1) - means[:, np.newaxis]).T)      
 
     snapshot = tracemalloc.take_snapshot()
     np_domain = np.lib.tracemalloc_domain
