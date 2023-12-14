@@ -18,10 +18,24 @@ def apply_convolution(images, kernel, stride=1, padding=0):
     Outputs:
         + output_images: np.array of shape (B, input_H, input_W)
     '''
-    ### TODO: fill in here ###
+    kernel = np.flipud(np.fliplr(kernel))
 
+    kernel_h, kernel_w = kernel.shape
+    output_h = images.shape[1] + 2 * padding - kernel.shape[0] + 1
+    output_w = images.shape[2] + 2 * padding - kernel.shape[1] + 1
+    output_images = np.zeros((0, output_h, output_w))
 
-
+    for image in images:
+        if padding > 0:
+            image_padded = np.zeros((image.shape[0] + 2 * padding, image.shape[1] + 2 * padding))
+            image_padded[padding:-padding, padding:-padding] = image
+        else:
+            image_padded = image
+        windows = np.lib.stride_tricks.as_strided(image_padded, 
+                                                  shape=(output_h, output_w, kernel_h, kernel_w), 
+                                                  strides=(image_padded.strides * 2))
+        output = np.tensordot(windows, kernel, axes=((2, 3), (0, 1)))
+        output_images = np.append(output_images, [output], axis=0)
 
     return output_images
 
