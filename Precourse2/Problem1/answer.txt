@@ -1,2 +1,2 @@
-Start Node: A
+Start Node: B
 Shortest distances: {'A': 0, 'B': 5, 'C': 3, 'D': 6, 'E': 9, 'F': 11}
