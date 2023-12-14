@@ -1,0 +1,26 @@
+name: Unit Tests
+
+on: [push, pull_request]
+
+jobs:
+  unit_test:
+    name: Run unit tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.12.0'
+
+      - name: Install Numpy
+        run: pip install numpy
+
+      - name: Run unit test for Problem 1
+        run: cd ../../Precourse2/Problem1
+             python dijkstra.py > output.txt
+             diff output.txt answer.txt
+             if [[ "$?" -eq "1" ]]; then exit 1 ; fi
