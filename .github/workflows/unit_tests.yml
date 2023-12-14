@@ -21,6 +21,8 @@ jobs:
 
       - name: Run unit test for Problem 1
         run: cd ../../Precourse2/Problem1
-             python dijkstra.py > output.txt
-             diff output.txt answer.txt
-             if [[ "$?" -eq "1" ]]; then exit 1 ; fi
+      - name: Excecute dijkstra.py
+        run: python dijkstra.py > output.txt
+      - name: Compare answer
+        run: diff output.txt answer.txt
+      - run: if [[ "$?" -eq "1" ]]; then exit 1 ; fi
