@@ -59,7 +59,7 @@ class MinHeap:
         min_heap = MinHeap()
         for item in self.heap:
             min_heap.push(item)
-        self = min_heap
+        self.heap = min_heap.heap
 
 if __name__ == "__main__":
     min_heap = MinHeap()
