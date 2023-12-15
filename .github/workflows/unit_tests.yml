@@ -35,3 +35,9 @@ jobs:
           python main.py input_hard.txt
           diff output.txt answer_hard.txt
           if [[ "$?" -eq "1" ]]; then exit 1 ; fi
+
+      - name: Run unit test for Problem 3
+        run: |
+          cd ./Precourse2/Problem3
+          output=$(python main.py)
+          if [[ "$output" -ne "Success!!\n" ]]; then exit 1; fi
