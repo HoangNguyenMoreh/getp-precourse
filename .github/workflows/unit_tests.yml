@@ -25,3 +25,13 @@ jobs:
           python dijkstra.py > output.txt
           diff output.txt answer.txt
           if [[ "$?" -eq "1" ]]; then exit 1 ; fi
+
+      - name: Run unit test for Problem 2
+        run: |
+          cd ./Precourse2/Problem2
+          python main.py input.txt
+          diff output.txt answer.txt
+          if [[ "$?" -eq "1" ]]; then exit 1 ; fi
+          python main.py input_hard.txt
+          diff output.txt answer_hard.txt
+          if [[ "$?" -eq "1" ]]; then exit 1 ; fi
