@@ -40,4 +40,4 @@ jobs:
         run: |
           cd ./Precourse2/Problem3
           output=$(python main.py)
-          if [[ "$output" -ne "Success!!\n" ]]; then exit 1; fi
+          if [[ "$output" -ne 'Success!!\n' ]]; then exit 1; fi
