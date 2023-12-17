@@ -39,5 +39,5 @@ jobs:
       - name: Run unit test for Problem 3
         run: |
           cd ./Precourse2/Problem3
-          ./unit_test.sh
+          bash unit_test.sh
           if [[ "$?" -eq "1" ]]; then exit 1 ; fi

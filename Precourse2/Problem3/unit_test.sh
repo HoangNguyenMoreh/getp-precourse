@@ -1,5 +1,7 @@
-output=$(python main.py)  # Replace 'python' with 'python3' if using Python 3
+#!/bin/bash
 
-if [ "$output" -ne "Su" ]; then
+output=$(python main.py)
+
+if [ "$output" != "Su" ]; then
     exit 1
 fi
