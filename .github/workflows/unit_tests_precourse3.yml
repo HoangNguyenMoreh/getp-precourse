@@ -23,7 +23,9 @@ jobs:
         run: pip install pybind11
 
       - name: Install C++ Compiler
-        run: sudo apt-get update && sudo apt-get install g++ -y
+        run: |
+          sudo apt-get update && sudo apt-get install g++ -y
+          sudo apt-get install mpich
 
       - name: Run unit test for Problem 1
         run: |
