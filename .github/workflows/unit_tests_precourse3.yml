@@ -32,7 +32,7 @@ jobs:
           cd ./Precourse3/Problem1/list
           make run
           if [[ "$?" -eq "1" ]]; then exit 1 ; fi
-          cd ./Precourse3/Problem1/vector
+          cd ../vector
           make run
           if [[ "$?" -eq "1" ]]; then exit 1 ; fi
 
