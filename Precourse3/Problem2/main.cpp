@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdint.h>
+#include <fstream>
 
 #define MAX_BOOK_TITLE 30
 #define MAX_AUTHOR_NAME 16
@@ -11,6 +12,7 @@
 // But, CAN ADD whatever you want
 
 
+#pragma pack(push, 1)
 // Total 54 bytes data
 typedef struct book_{
     char title[MAX_BOOK_TITLE]; // 30 bytes
@@ -18,6 +20,7 @@ typedef struct book_{
     uint32_t volume_number; // 4 bytes
     uint32_t ISBN; // 4 bytes
 } book;
+#pragma pack(pop)
 
 typedef struct library_{
   book *books;
@@ -25,18 +28,22 @@ typedef struct library_{
 
 // Function to save the books data of the library
 void serialize(char* path, library* lib, int number_of_books){
-  /*
-    pseudo implement, please remove
-    write(path, lib->books);
-  */
+  std::ofstream file(path, std::ios::binary);
+  for (int i=0 ; i < number_of_books ; ++i)
+  {
+    file.write(reinterpret_cast<char*>(&(lib->books[i])), sizeof(book));
+  }
+  file.close();
 }
 
 // Function to load the books data of the library
 void deserialize(char* path, library *lib, int number_of_books){
-  /*
-    pseudo implement, please remove
-    read(path, lib->books);
-  */
+  std::ifstream file(path, std::ios::binary);
+  for (int i=0; i < number_of_books ; ++i)
+  {
+    file.read(reinterpret_cast<char*>(&(lib->books[i])), sizeof(book));
+  }
+  file.close();
 }
 
 // Function to fill defaults data
@@ -76,7 +83,7 @@ int main(int argc, char* argv[]){
   void* memory_pool = malloc(54 * MAX_BOOKS * 2);
 
   lib.books = (book*)memory_pool;
-  backup.books = (books*)((char*)(memory_pool + 54 * MAX_BOOKS));
+  backup.books = (book*)((char*)(memory_pool + 54 * MAX_BOOKS));
 
   insert_books(&lib);
   print_contents(&lib);

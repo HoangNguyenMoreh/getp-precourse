@@ -13,11 +13,11 @@ private:
     Node *next;
     Node *prev;
 
+    Node();
     Node(const T &value);
   };
 
-  Node *head;
-  Node *tail;
+  Node impl;
   std::size_t size_;
 
 public:
@@ -27,12 +27,44 @@ public:
 
   public:
     iterator(Node *node);
+    iterator(const iterator &other);
 
     T &operator*() const;
     iterator &operator++();
     iterator operator++(int);
+    iterator &operator--();
     bool operator!=(const iterator &other) const;
   };
+
+  // Begin: Another types of iterator
+  class const_iterator {
+  private:
+    const Node *current;
+
+  public:
+    const_iterator(const Node *node);
+    const_iterator(const const_iterator &other);
+
+    const T &operator*() const;
+    const_iterator &operator++();
+    const_iterator operator++(int);
+    const_iterator &operator--();
+    bool operator!=(const const_iterator &other) const;
+  };
+
+  template <class _It>
+  class reverse_iterator  {
+  private:
+    _It iter;
+
+  public:
+    reverse_iterator (_It iter);
+    auto &operator*() const;
+    reverse_iterator &operator++();
+    reverse_iterator operator++(int);
+    bool operator!=(const reverse_iterator &other) const;
+  };
+  // End
 
   list();
   list(const list &other);
@@ -55,12 +87,12 @@ public:
 
   iterator begin();
   iterator end();
-  iterator cbegin() const;
-  iterator cend() const;
-  iterator rbegin();
-  iterator rend();
-  iterator crbegin() const;
-  iterator crend() const;
+  const_iterator cbegin() const;
+  const_iterator cend() const;
+  reverse_iterator<iterator> rbegin();
+  reverse_iterator<iterator> rend();
+  reverse_iterator<const_iterator> crbegin() const;
+  reverse_iterator<const_iterator> crend() const;
 };
 
 } // namespace getp

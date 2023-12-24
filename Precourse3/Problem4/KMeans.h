@@ -9,6 +9,7 @@ private:
     std::vector<Point> data_points;
     std::vector<Point> centroids;
     int k;
+    std::vector<int> cluster_assignment;
 
 public:
     KMeans(int num_points, int k);
