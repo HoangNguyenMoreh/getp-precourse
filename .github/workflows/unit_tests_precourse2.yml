@@ -1,10 +1,10 @@
-name: Unit Tests
+name: Unit Tests Precourse 2
 
 on: [push, pull_request]
 
 jobs:
   unit_test:
-    name: Run unit tests
+    name: Run unit tests precourse 2
     runs-on: ubuntu-latest
 
     steps:
