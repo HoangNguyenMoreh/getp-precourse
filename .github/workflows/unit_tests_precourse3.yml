@@ -1,6 +1,6 @@
 name: Unit Tests Precourse 3
 
-on: [push, pull_request]
+on: [push]
 
 jobs:
   unit_test:
@@ -46,6 +46,6 @@ jobs:
       - name: Run unit test for Problem 3
         run: |
           cd ./Precourse3/Problem3
-          g++ -O3 -Wall -shared -std=c++11 -fPIC $(python -m pybind11 --includes) matmul.cpp -o matmul_c$(python-config --extension-suffix)
+          g++ -O3 -Wall -shared -std=c++11 -fPIC $(python -m pybind11 --includes) matmul.cpp -o matmul_c$(python3-config --extension-suffix)
           python main.py
           if [[ "$?" -eq "1" ]]; then exit 1 ; fi
