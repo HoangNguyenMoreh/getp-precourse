@@ -2,6 +2,6 @@
 
 output=$(python main.py)
 
-if [ "$output" != "Success!!" ]; then
+if [ "$output" != "Su" ]; then
     exit 1
 fi
